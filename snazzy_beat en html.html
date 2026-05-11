@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>SNAZZY BEAT — Beats de qualité studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --gold:#D4A017;--gold2:#F5C842;--bg:#080808;--bg2:#0f0f0f;--bg3:#161616;
+  --border:#222;--text:#e8e8e8;--muted:#888;--white:#fff;
+  --r:12px;--r2:8px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;border:none;outline:none;font-family:'Syne',sans-serif}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:#111}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+
+/* ══════════════ NAV ══════════════ */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 24px;
+  background:rgba(8,8,8,.92);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center}
+.nav-inner{width:100%;max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:32px}
+.nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer}
+.logo-mark{width:36px;height:36px;background:var(--gold);border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:#000;font-weight:700}
+.logo-mark.sm{width:28px;height:28px;font-size:.85rem}
+.logo-wordmark{line-height:1}
+.logo-snazzy{font-size:.55rem;letter-spacing:.2em;color:var(--muted);font-weight:600}
+.logo-beat{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.08em;color:var(--white)}
+.nav-links{display:flex;gap:28px;list-style:none;margin-left:auto}
+.nav-link{font-size:.8rem;font-weight:600;letter-spacing:.08em;color:var(--muted);
+  transition:color .2s;text-transform:uppercase}
+.nav-link:hover,.nav-link.active{color:var(--white)}
+.nav-actions{display:flex;gap:10px;margin-left:16px}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text);
+  padding:8px 18px;border-radius:var(--r2);font-size:.78rem;font-weight:600;
+  letter-spacing:.06em;transition:all .2s}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.btn-gold{background:var(--gold);color:#000;padding:8px 18px;border-radius:var(--r2);
+  font-size:.78rem;font-weight:700;letter-spacing:.06em;transition:all .2s}
+.btn-gold:hover{background:var(--gold2)}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;padding:4px;margin-left:auto}
+.hamburger span{display:block;width:22px;height:2px;background:var(--white);border-radius:2px;transition:.3s}
+.mobile-menu{display:none;flex-direction:column;gap:4px;
+  position:fixed;top:64px;left:0;right:0;background:var(--bg2);
+  padding:16px 24px;border-bottom:1px solid var(--border);z-index:99}
+.mobile-menu.open{display:flex}
+.mob-link{padding:12px 0;font-size:.9rem;font-weight:600;border-bottom:1px solid var(--border);cursor:pointer}
+
+/* ══════════════ PAGES ══════════════ */
+.page{display:none;padding-top:64px}
+.page.active{display:block}
+
+/* ══════════════ HERO ══════════════ */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;
+  background:radial-gradient(ellipse 80% 60% at 60% 50%,rgba(212,160,23,.07) 0%,transparent 70%)}
+.hero-grid-bg{position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);
+  background-size:60px 60px;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+.orb-1{width:500px;height:500px;background:rgba(212,160,23,.08);top:-100px;right:-100px}
+.orb-2{width:300px;height:300px;background:rgba(212,160,23,.05);bottom:0;left:0}
+.hero-container{width:100%;max-width:1200px;margin:0 auto;padding:80px 24px;
+  display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;
+  background:rgba(212,160,23,.1);border:1px solid rgba(212,160,23,.25);
+  border-radius:50px;padding:6px 14px;font-size:.72rem;font-weight:600;
+  letter-spacing:.1em;color:var(--gold);margin-bottom:20px}
+.badge-led{width:6px;height:6px;border-radius:50%;background:var(--gold);
+  animation:blink 1.4s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,7vw,6rem);
+  line-height:.95;letter-spacing:.02em;margin-bottom:20px}
+.hero-title .gold{color:var(--gold)}
+.hero-desc{font-size:.9rem;color:var(--muted);line-height:1.7;margin-bottom:28px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--gold);
+  color:#000;padding:12px 24px;border-radius:var(--r2);font-size:.82rem;
+  font-weight:700;letter-spacing:.06em;transition:all .2s;border:none}
+.btn-primary:hover{background:var(--gold2);transform:translateY(-1px)}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:transparent;
+  border:1px solid var(--border);color:var(--text);padding:12px 24px;
+  border-radius:var(--r2);font-size:.82rem;font-weight:600;letter-spacing:.06em;transition:all .2s}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold)}
+.hero-stats{display:flex;gap:20px;align-items:center}
+.hs-item{text-align:center}
+.hs-num{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--gold)}
+.hs-suf{font-size:.75rem;color:var(--gold)}
+.hs-label{display:block;font-size:.7rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.hs-sep{width:1px;height:36px;background:var(--border)}
+
+/* PLAYER */
+.hero-right{display:flex;justify-content:center}
+.featured-player{background:var(--bg3);border:1px solid var(--border);border-radius:20px;
+  padding:28px;width:100%;max-width:320px;position:relative}
+.vinyl-wrap{display:flex;justify-content:center;margin-bottom:20px}
+.vinyl{width:160px;height:160px;border-radius:50%;
+  background:radial-gradient(circle,#1a1a1a 30%,#111 30%,#222 32%,#111 32%,#222 55%,#111 55%,#222 57%,#1a1a1a 57%);
+  display:flex;align-items:center;justify-content:center;position:relative;
+  box-shadow:0 0 40px rgba(212,160,23,.15)}
+.vinyl.spin{animation:spin 3s linear infinite}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.vinyl-label{width:56px;height:56px;border-radius:50%;background:var(--gold);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:1}
+.vl-text{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:#000;line-height:1}
+.vl-sub{font-size:.45rem;font-weight:700;color:#000;letter-spacing:.1em}
+.fp-info{text-align:center;margin-bottom:14px}
+.fp-title{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.04em}
+.fp-meta{font-size:.72rem;color:var(--muted);margin-top:2px}
+.fp-viz{height:40px;overflow:hidden;margin-bottom:12px}
+.viz-bars{display:flex;align-items:flex-end;gap:2px;height:100%}
+.viz-bar{flex:1;background:var(--gold);border-radius:2px 2px 0 0;opacity:.5;min-height:4px;transition:.1s}
+.viz-bar.active{opacity:1;background:var(--gold2)}
+.fp-seek{height:4px;background:var(--border);border-radius:2px;cursor:pointer;margin-bottom:6px}
+.fp-seek-fill{height:100%;background:var(--gold);border-radius:2px;width:0%;transition:width .5s}
+.fp-times{display:flex;justify-content:space-between;font-size:.65rem;color:var(--muted);
+  font-family:'Space Mono',monospace;margin-bottom:14px}
+.fp-controls{display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:16px}
+.fpc-btn{background:transparent;border:1px solid var(--border);border-radius:50%;
+  width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+  color:var(--text);transition:all .2s}
+.fpc-btn:hover{border-color:var(--gold);color:var(--gold)}
+.fpc-play{width:48px;height:48px;background:var(--gold);border:none;color:#000}
+.fpc-play:hover{background:var(--gold2)}
+.fp-buy-row{display:flex;justify-content:space-between;align-items:center;
+  background:rgba(212,160,23,.06);border:1px solid rgba(212,160,23,.15);
+  border-radius:var(--r2);padding:10px 14px}
+.fp-from{font-size:.65rem;color:var(--muted);display:block}
+.fp-price{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--gold)}
+.fp-buy-btn{background:var(--gold);color:#000;padding:8px 14px;border-radius:6px;
+  font-size:.75rem;font-weight:700;display:flex;align-items:center;gap:6px;transition:all .2s}
+.fp-buy-btn:hover{background:var(--gold2)}
+
+/* ══════════════ SECTIONS ══════════════ */
+.section{max-width:1200px;margin:0 auto;padding:80px 24px}
+.section-header{text-align:center;margin-bottom:48px}
+.sec-tag{display:inline-block;font-size:.65rem;font-weight:700;letter-spacing:.18em;
+  color:var(--gold);border:1px solid rgba(212,160,23,.3);border-radius:50px;
+  padding:4px 14px;margin-bottom:14px;text-transform:uppercase}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4vw,3rem);
+  letter-spacing:.02em;line-height:1}
+.sec-title em{color:var(--gold);font-style:normal}
+.sec-sub{font-size:.85rem;color:var(--muted);margin-top:10px}
+
+/* GENRE FILTERS */
+.genre-filters{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:32px}
+.gf-btn{background:transparent;border:1px solid var(--border);color:var(--muted);
+  padding:8px 20px;border-radius:50px;font-size:.78rem;font-weight:600;
+  letter-spacing:.06em;transition:all .2s}
+.gf-btn.active,.gf-btn:hover{background:var(--gold);border-color:var(--gold);color:#000}
+
+/* BEAT GRID */
+.beat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-bottom:32px}
+.beat-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);
+  padding:16px;transition:all .25s;cursor:pointer}
+.beat-card:hover{border-color:rgba(212,160,23,.4);transform:translateY(-3px)}
+.bc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
+.bc-thumb{width:56px;height:56px;border-radius:10px;
+  background:linear-gradient(135deg,rgba(212,160,23,.2),rgba(212,160,23,.05));
+  display:flex;align-items:center;justify-content:center;font-size:1.4rem}
+.bc-badge{font-size:.62rem;font-weight:700;letter-spacing:.1em;padding:3px 9px;
+  border-radius:50px;border:1px solid}
+.badge-drill{color:#a78bfa;border-color:#a78bfa33;background:rgba(167,139,250,.08)}
+.badge-trap{color:#f87171;border-color:#f8717133;background:rgba(248,113,113,.08)}
+.badge-afrobeat{color:#34d399;border-color:#34d39933;background:rgba(52,211,153,.08)}
+.badge-amapiano{color:#60a5fa;border-color:#60a5fa33;background:rgba(96,165,250,.08)}
+.bc-title{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:.04em;margin-bottom:4px}
+.bc-meta{font-size:.7rem;color:var(--muted);font-family:'Space Mono',monospace}
+.bc-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:14px;
+  padding-top:14px;border-top:1px solid var(--border)}
+.bc-price{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--gold)}
+.bc-actions{display:flex;gap:6px}
+.bc-play,.bc-buy{width:32px;height:32px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;transition:all .2s}
+.bc-play{background:rgba(212,160,23,.12);border:1px solid rgba(212,160,23,.25);color:var(--gold)}
+.bc-play:hover{background:var(--gold);color:#000}
+.bc-buy{background:var(--gold);color:#000}
+.bc-buy:hover{background:var(--gold2)}
+.bc-plays{font-size:.68rem;color:var(--muted);display:flex;align-items:center;gap:4px}
+
+.sec-cta{text-align:center}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--text);
+  padding:12px 28px;border-radius:var(--r2);font-size:.82rem;font-weight:600;
+  letter-spacing:.06em;transition:all .2s}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+
+/* LICENCES */
+.licence-section{background:var(--bg2);padding:80px 0}
+.licence-grid{max-width:1200px;margin:0 auto;padding:0 24px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.lic-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);
+  padding:28px;position:relative;transition:all .3s}
+.lic-card:hover{border-color:rgba(212,160,23,.3)}
+.lic-hot{border-color:rgba(212,160,23,.4);box-shadow:0 0 40px rgba(212,160,23,.08)}
+.lic-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+  background:var(--gold);color:#000;font-size:.65rem;font-weight:800;
+  letter-spacing:.12em;padding:4px 14px;border-radius:50px;white-space:nowrap}
+.lic-top{text-align:center;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+.lic-tier{font-size:.75rem;font-weight:700;letter-spacing:.1em;color:var(--muted);
+  text-transform:uppercase;margin-bottom:10px}
+.lic-price{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:.02em}
+.lic-price span{font-size:.9rem;font-family:'Syne',sans-serif;margin-left:4px;color:var(--muted)}
+.lic-price.gold{color:var(--gold)}
+.lic-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.lic-list li{font-size:.82rem;display:flex;align-items:center;gap:8px}
+.li-check{color:var(--gold)}
+.li-x{color:#555}
+.btn-lic{width:100%;background:transparent;border:1px solid var(--border);
+  color:var(--text);padding:12px;border-radius:var(--r2);font-size:.8rem;
+  font-weight:700;letter-spacing:.06em;transition:all .2s}
+.btn-lic:hover{border-color:var(--gold);color:var(--gold)}
+.btn-lic-gold{background:var(--gold);color:#000;border-color:var(--gold)}
+.btn-lic-gold:hover{background:var(--gold2);border-color:var(--gold2);color:#000}
+
+/* À PROPOS */
+.about-section{padding:80px 24px}
+.about-inner{max-width:1200px;margin:0 auto;display:grid;
+  grid-template-columns:1fr 1.4fr;gap:60px;align-items:center}
+.about-art{position:relative;display:flex;justify-content:center}
+.about-disc{position:relative;width:200px;height:200px;display:flex;align-items:center;justify-content:center}
+.ad-ring{position:absolute;border-radius:50%;border:1px solid rgba(212,160,23,.2)}
+.r1{width:200px;height:200px;animation:pulse2 3s ease-in-out infinite}
+.r2{width:150px;height:150px;animation:pulse2 3s ease-in-out infinite .5s}
+.r3{width:100px;height:100px;animation:pulse2 3s ease-in-out infinite 1s}
+@keyframes pulse2{0%,100%{opacity:.3}50%{opacity:1}}
+.ad-center{width:70px;height:70px;background:var(--gold);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:#000}
+.about-pro-badge{position:absolute;bottom:-10px;right:20px;background:var(--bg3);
+  border:1px solid var(--gold);color:var(--gold);font-size:.65rem;font-weight:700;
+  letter-spacing:.1em;padding:4px 12px;border-radius:50px}
+.about-p{font-size:.88rem;color:var(--muted);line-height:1.8;margin-top:14px}
+.about-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.about-tags span{background:rgba(212,160,23,.1);border:1px solid rgba(212,160,23,.2);
+  color:var(--gold);padding:5px 14px;border-radius:50px;font-size:.72rem;font-weight:600}
+.about-socials{display:flex;gap:10px;margin-top:20px}
+.soc-btn{width:40px;height:40px;border-radius:50%;background:var(--bg3);
+  border:1px solid var(--border);display:flex;align-items:center;justify-content:center;
+  color:var(--muted);transition:all .2s}
+.soc-btn:hover{border-color:var(--gold);color:var(--gold)}
+
+/* FOOTER */
+.site-footer{background:var(--bg2);border-top:1px solid var(--border);padding:24px}
+.footer-inner{max-width:1200px;margin:0 auto;display:flex;
+  justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-logo{display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--muted)}
+.footer-links{display:flex;gap:20px}
+.footer-links a{font-size:.75rem;color:var(--muted);transition:color .2s}
+.footer-links a:hover{color:var(--gold)}
+.footer-pay{display:flex;gap:6px}
+.pay-tag{background:rgba(255,255,255,.05);border:1px solid var(--border);
+  padding:4px 10px;border-radius:50px;font-size:.65rem;font-weight:600;color:var(--muted)}
+
+/* ══════════════ DASHBOARD ══════════════ */
+.dashboard-layout{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+.sidebar{background:var(--bg2);border-right:1px solid var(--border);
+  padding:24px 16px;display:flex;flex-direction:column;gap:8px;position:sticky;top:64px;height:calc(100vh - 64px);overflow-y:auto}
+.sidebar-logo{display:flex;align-items:center;gap:8px;margin-bottom:24px;cursor:pointer}
+.sidebar-nav{display:flex;flex-direction:column;gap:4px;flex:1}
+.sb-link{display:flex;align-items:center;gap:10px;background:transparent;
+  color:var(--muted);padding:10px 12px;border-radius:var(--r2);
+  font-size:.8rem;font-weight:600;letter-spacing:.04em;text-align:left;
+  transition:all .2s;border:none}
+.sb-link:hover{background:rgba(255,255,255,.04);color:var(--text)}
+.sb-link.active{background:rgba(212,160,23,.1);color:var(--gold)}
+.sb-back{display:flex;align-items:center;gap:8px;background:transparent;
+  border:1px solid var(--border);color:var(--muted);padding:10px 12px;
+  border-radius:var(--r2);font-size:.78rem;font-weight:600;margin-top:auto;transition:all .2s}
+.sb-back:hover{border-color:var(--gold);color:var(--gold)}
+.dash-main{padding:24px;overflow-y:auto;background:var(--bg)}
+.dash-topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
+.dash-hi{font-size:.72rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.dash-name{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.05em;color:var(--gold)}
+.dash-top-right{display:flex;align-items:center;gap:12px}
+.notif-btn{background:var(--bg3);border:1px solid var(--border);border-radius:50%;
+  width:38px;height:38px;display:flex;align-items:center;justify-content:center;
+  color:var(--muted);position:relative;transition:all .2s}
+.notif-btn:hover{border-color:var(--gold)}
+.notif-dot{position:absolute;top:8px;right:8px;width:6px;height:6px;
+  background:var(--gold);border-radius:50%;border:2px solid var(--bg2)}
+.dash-avatar{width:38px;height:38px;background:var(--gold);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:.9rem;color:#000}
+.dash-tab{display:none}
+.dash-tab.active{display:block}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px}
+.kpi-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);
+  padding:20px;display:flex;align-items:center;gap:14px}
+.kpi-icon{width:42px;height:42px;background:rgba(255,255,255,.04);border:1px solid var(--border);
+  border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--muted);flex-shrink:0}
+.gold-icon{background:rgba(212,160,23,.1);border-color:rgba(212,160,23,.2);color:var(--gold)}
+.kpi-body{flex:1}
+.kpi-val{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.02em}
+.kpi-lbl{font-size:.68rem;color:var(--muted);font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.kpi-trend{font-size:.72rem;font-weight:700;padding:3px 8px;border-radius:50px}
+.kpi-trend.up{background:rgba(52,211,153,.1);color:#34d399}
+.kpi-trend.neutral{background:rgba(255,255,255,.05);color:var(--muted)}
+.dash-two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.dash-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-top:16px}
+.dash-card-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;
+  font-size:.8rem;font-weight:600;letter-spacing:.06em}
+.card-more{background:transparent;border:none;color:var(--gold);font-size:.75rem;font-weight:600;
+  cursor:pointer;font-family:'Syne',sans-serif}
+.mini-order{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)}
+.mini-order:last-child{border-bottom:none}
+.mo-icon{width:32px;height:32px;background:rgba(212,160,23,.1);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;font-size:.8rem}
+.mo-body{flex:1}
+.mo-name{font-size:.8rem;font-weight:600}
+.mo-sub{font-size:.68rem;color:var(--muted)}
+.mo-price{font-family:'Bebas Neue',sans-serif;font-size:.95rem;color:var(--gold)}
+.top-beat-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)}
+.top-beat-row:last-child{border-bottom:none}
+.tb-rank{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--border);width:20px}
+.tb-body{flex:1}
+.tb-title{font-size:.8rem;font-weight:600}
+.tb-plays{font-size:.68rem;color:var(--muted)}
+.tb-bar{height:3px;background:var(--border);border-radius:2px;margin-top:4px}
+.tb-fill{height:100%;background:var(--gold);border-radius:2px}
+.tab-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.tab-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.04em;
+  display:flex;align-items:center;gap:10px}
+.tab-ct{font-size:.9rem;background:rgba(212,160,23,.15);color:var(--gold);
+  padding:2px 10px;border-radius:50px;font-family:'Syne',sans-serif;font-weight:700}
+.table-wrap{overflow-x:auto}
+.dash-table{width:100%;border-collapse:collapse;font-size:.8rem}
+.dash-table th{text-align:left;padding:10px 14px;font-size:.68rem;font-weight:700;
+  letter-spacing:.08em;color:var(--muted);text-transform:uppercase;
+  border-bottom:1px solid var(--border)}
+.dash-table td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.04)}
+.dash-table tr:hover td{background:rgba(255,255,255,.02)}
+.status-badge{font-size:.65rem;font-weight:700;padding:3px 9px;border-radius:50px;letter-spacing:.06em}
+.s-active{background:rgba(52,211,153,.1);color:#34d399}
+.s-pending{background:rgba(251,191,36,.1);color:#fbbf24}
+.s-paid{background:rgba(52,211,153,.1);color:#34d399}
+.s-new{background:rgba(212,160,23,.1);color:var(--gold)}
+.search-bar{display:flex;align-items:center;gap:8px;background:var(--bg3);
+  border:1px solid var(--border);border-radius:var(--r2);padding:8px 14px;min-width:220px}
+.search-bar input{background:none;border:none;outline:none;font-family:'Syne',sans-serif;
+  font-size:.8rem;color:var(--text);width:100%}
+.analytics-grid{display:grid;grid-template-columns:2fr 1fr;gap:16px}
+.chart-area{height:200px;display:flex;align-items:flex-end;gap:6px;padding:8px 0}
+.chart-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+.chart-bar{width:100%;background:var(--gold);border-radius:4px 4px 0 0;transition:.3s}
+.chart-label{font-size:.6rem;color:var(--muted);font-family:'Space Mono',monospace}
+.genre-bars{display:flex;flex-direction:column;gap:12px;padding-top:8px}
+.gb-row{display:flex;flex-direction:column;gap:4px}
+.gb-top{display:flex;justify-content:space-between;font-size:.75rem}
+.gb-pct{color:var(--muted)}
+.gb-track{height:6px;background:var(--border);border-radius:3px}
+.gb-fill{height:100%;border-radius:3px}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+.stat-mini{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);
+  padding:16px;text-align:center}
+.sm-lbl{font-size:.68rem;color:var(--muted);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+.sm-val{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.02em}
+.gold-text{color:var(--gold)}
+.settings-two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.settings-group-title{font-size:.72rem;font-weight:700;letter-spacing:.1em;
+  color:var(--muted);text-transform:uppercase;margin-bottom:14px}
+.sf{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.sf label{font-size:.72rem;color:var(--muted);font-weight:600}
+.si{background:var(--bg);border:1px solid var(--border);border-radius:var(--r2);
+  padding:9px 12px;color:var(--text);font-family:'Syne',sans-serif;font-size:.82rem;
+  outline:none;transition:border .2s}
+.si:focus{border-color:var(--gold)}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;
+  padding:10px 0;border-bottom:1px solid var(--border);font-size:.82rem;cursor:pointer}
+.tog{display:none}
+.tog-sl{width:38px;height:20px;background:var(--border);border-radius:50px;
+  position:relative;transition:.3s;flex-shrink:0}
+.tog-sl::after{content:'';position:absolute;left:3px;top:3px;
+  width:14px;height:14px;border-radius:50%;background:#666;transition:.3s}
+.tog:checked+.tog-sl{background:var(--gold)}
+.tog:checked+.tog-sl::after{left:21px;background:#000}
+.action-btn{background:transparent;border:1px solid var(--border);color:var(--muted);
+  padding:5px 10px;border-radius:6px;font-size:.7rem;cursor:pointer;transition:all .2s;font-family:'Syne',sans-serif}
+.action-btn:hover{border-color:var(--gold);color:var(--gold)}
+.analytics-card{grid-column:1}
+
+/* MODALS */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);
+  display:none;align-items:center;justify-content:center;z-index:200;padding:20px}
+.modal-overlay.open{display:flex}
+.modal-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;
+  padding:32px;width:100%;max-width:380px;position:relative}
+.modal-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.06);
+  border:none;color:var(--muted);width:28px;height:28px;border-radius:50%;
+  font-size:.8rem;cursor:pointer;transition:all .2s}
+.modal-close:hover{background:rgba(255,255,255,.12);color:var(--white)}
+.modal-logo{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.modal-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.04em;margin-bottom:20px}
+.modal-field{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.modal-field label{font-size:.72rem;color:var(--muted);font-weight:600}
+.modal-input{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r2);
+  padding:11px 14px;color:var(--text);font-family:'Syne',sans-serif;font-size:.88rem;outline:none;transition:border .2s}
+.modal-input:focus{border-color:var(--gold)}
+.modal-hint{font-size:.72rem;color:var(--muted);text-align:center;margin-top:12px}
+.buy-modal-box{max-width:420px}
+.buy-sub{font-size:.82rem;color:var(--muted);margin-bottom:16px}
+.buy-lic-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.buy-opt{border:1px solid var(--border);border-radius:var(--r2);padding:12px 16px;
+  cursor:pointer;transition:all .2s;display:flex;justify-content:space-between;align-items:center}
+.buy-opt:hover,.buy-opt.selected{border-color:var(--gold);background:rgba(212,160,23,.06)}
+.buy-opt-name{font-weight:600;font-size:.85rem}
+.buy-opt-price{font-family:'Bebas Neue',sans-serif;color:var(--gold);font-size:1rem}
+.buy-total-row{display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid var(--border);padding-top:14px;margin-bottom:4px}
+.buy-total-val{font-family:'Bebas Neue',sans-serif;font-size:1.4rem}
+
+/* TOAST */
+.toast{position:fixed;bottom:28px;right:28px;background:var(--bg3);
+  border:1px solid rgba(212,160,23,.4);color:var(--text);padding:12px 20px;
+  border-radius:var(--r2);font-size:.82rem;font-weight:600;
+  transform:translateY(80px);opacity:0;transition:all .35s;z-index:999;pointer-events:none}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero-container{grid-template-columns:1fr;text-align:center}
+  .hero-right{display:none}
+  .hero-stats{justify-content:center}
+  .hero-btns{justify-content:center}
+  .about-inner{grid-template-columns:1fr;text-align:center}
+  .about-art{margin-bottom:30px}
+  .about-socials{justify-content:center}
+  .about-tags{justify-content:center}
+  .dash-two-col,.analytics-grid,.settings-two-col,.stats-row{grid-template-columns:1fr}
+  .analytics-card{grid-column:1}
+}
+@media(max-width:768px){
+  .nav-links,.nav-actions{display:none}
+  .hamburger{display:flex}
+  .dashboard-layout{grid-template-columns:1fr}
+  .sidebar{display:none;position:fixed;left:0;top:64px;bottom:0;width:240px;z-index:80}
+  .sidebar.open{display:flex}
+  .licence-grid{padding:0 24px}
+}
+</style>
+</head>
+<body>
+
+<div class="noise-overlay"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="showPage('home')">
+      <div class="logo-mark">SB</div>
+      <div class="logo-wordmark">
+        <span class="logo-snazzy">SNAZZY</span>
+        <span class="logo-beat">BEAT</span>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a class="nav-link active" onclick="showPage('home');setActiveNav(this)">Accueil</a></li>
+      <li><a class="nav-link" onclick="scrollToId('catalogue');setActiveNav(this)">Catalogue</a></li>
+      <li><a class="nav-link" onclick="scrollToId('licences');setActiveNav(this)">Licences</a></li>
+      <li><a class="nav-link" onclick="scrollToId('about');setActiveNav(this)">À propos</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn-ghost" id="loginBtn" onclick="openModal('loginModal')">Connexion</button>
+      <button class="btn-gold" id="dashboardBtn" onclick="showPage('dashboard')" style="display:none">Dashboard</button>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMobileNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a class="mob-link" onclick="showPage('home');toggleMobileNav()">Accueil</a>
+    <a class="mob-link" onclick="scrollToId('catalogue');toggleMobileNav()">Catalogue</a>
+    <a class="mob-link" onclick="scrollToId('licences');toggleMobileNav()">Licences</a>
+    <a class="mob-link" onclick="scrollToId('about');toggleMobileNav()">À propos</a>
+    <button class="btn-ghost" style="margin-top:8px" onclick="openModal('loginModal');toggleMobileNav()">Connexion</button>
+  </div>
+</nav>
+
+<!-- PAGE ACCUEIL -->
+<section id="home" class="page active">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-grid-bg"></div>
+    <div class="orb orb-1"></div><div class="orb orb-2"></div>
+    <div class="hero-container">
+      <div class="hero-left">
+        <div class="hero-badge"><span class="badge-led"></span><span class="badge-text">Nouveaux beats chaque semaine</span></div>
+        <h1 class="hero-title">
+          <span>CRÉEZ</span><br>
+          <span class="gold">L'INÉDIT.</span><br>
+          <span>DOMINEZ.</span>
+        </h1>
+        <p class="hero-desc">Drill · Trap · Afrobeat · Amapiano<br>Téléchargement instantané. Licence claire.<br>Prêt pour ton prochain hit.</p>
+        <div class="hero-btns">
+          <button class="btn-primary" onclick="scrollToId('catalogue')">
+            Explorer les beats
+            <svg viewBox="0 0 24 24" width="15" height="15"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+          </button>
+          <button class="btn-secondary" onclick="toggleFeatured()">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            Écouter
+          </button>
+        </div>
+        <div class="hero-stats">
+          <div class="hs-item"><span class="hs-num" data-target="150">0</span><span class="hs-suf">+</span><span class="hs-label">Beats</span></div>
+          <div class="hs-sep"></div>
+          <div class="hs-item"><span class="hs-num" data-target="600">0</span><span class="hs-suf">+</span><span class="hs-label">Artistes</span></div>
+          <div class="hs-sep"></div>
+          <div class="hs-item"><span class="hs-num" data-target="5">0</span><span class="hs-suf">ans</span><span class="hs-label">d'expérience</span></div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="featured-player" id="featuredPlayer">
+          <div class="vinyl-wrap">
+            <div class="vinyl" id="vinylDisc">
+              <div class="vinyl-label"><div class="vl-text">SB</div><div class="vl-sub" id="fpGenre">DRILL</div></div>
+            </div>
+          </div>
+          <div class="fp-info">
+            <div class="fp-title" id="fpTitle">Dark Ritual</div>
+            <div class="fp-meta" id="fpMeta">138 BPM · C#m</div>
+          </div>
+          <div class="fp-viz"><div class="viz-bars" id="vizBars"></div></div>
+          <div class="fp-seek" id="fpSeek" onclick="seekFeatured(event)">
+            <div class="fp-seek-fill" id="fpSeekFill"></div>
+          </div>
+          <div class="fp-times"><span id="fpCurrentTime">0:00</span><span id="fpDuration">2:54</span></div>
+          <div class="fp-controls">
+            <button class="fpc-btn fpc-sm" onclick="prevFeatured()">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M19 20L9 12l10-8v16zM5 4h2v16H5z"/></svg>
+            </button>
+            <button class="fpc-btn fpc-play" id="fpPlayBtn" onclick="toggleFeatured()">
+              <svg id="fpPlayIcon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <button class="fpc-btn fpc-sm" onclick="nextFeatured()">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M5 4l10 8-10 8V4zm14 0h-2v16h2z"/></svg>
+            </button>
+          </div>
+          <div class="fp-buy-row">
+            <div class="fp-price-info"><span class="fp-from">À partir de</span><span class="fp-price" id="fpPrice">12 000 FCFA</span></div>
+            <button class="fp-buy-btn" onclick="buyFeatured()">Acheter <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATALOGUE -->
+  <div class="section" id="catalogue">
+    <div class="section-header">
+      <div class="sec-tag">CATALOGUE</div>
+      <h2 class="sec-title">Beats en <em>vedette</em></h2>
+      <p class="sec-sub">Sélection premium pour artistes exigeants</p>
+    </div>
+    <div class="genre-filters" id="genreFilters">
+      <button class="gf-btn active" data-genre="all">Tous</button>
+      <button class="gf-btn" data-genre="drill">Drill</button>
+      <button class="gf-btn" data-genre="trap">Trap</button>
+      <button class="gf-btn" data-genre="afrobeat">Afrobeat</button>
+      <button class="gf-btn" data-genre="amapiano">Amapiano</button>
+    </div>
+    <div class="beat-grid" id="beatGrid"></div>
+    <div class="sec-cta">
+      <button class="btn-outline" onclick="showToast('Catalogue complet bientôt disponible !')">Voir tous les beats →</button>
+    </div>
+  </div>
+
+  <!-- LICENCES -->
+  <div style="background:var(--bg2);margin:0 -0px;padding:80px 0" id="licences">
+    <div class="section-header" style="padding:0 24px">
+      <div class="sec-tag">LICENCES</div>
+      <h2 class="sec-title">Choisir ton <em>plan</em></h2>
+      <p class="sec-sub">Tarifs clairs, droits transparents</p>
+    </div>
+    <div class="licence-grid">
+      <div class="lic-card">
+        <div class="lic-top"><div class="lic-tier">MP3 Basic</div><div class="lic-price">5 000<span>FCFA</span></div></div>
+        <ul class="lic-list">
+          <li><span class="li-check">✓</span> Fichier MP3 320kbps</li>
+          <li><span class="li-check">✓</span> Jusqu'à 10 000 streams</li>
+          <li><span class="li-check">✓</span> Non-commercial uniquement</li>
+          <li><span class="li-x">✗</span> Stems inclus</li>
+          <li><span class="li-x">✗</span> Usage commercial</li>
+        </ul>
+        <button class="btn-lic" onclick="showToast('Licence Basic sélectionnée')">Choisir Basic</button>
+      </div>
+      <div class="lic-card lic-hot">
+        <div class="lic-badge">★ POPULAIRE</div>
+        <div class="lic-top"><div class="lic-tier">WAV Premium</div><div class="lic-price gold">15 000<span>FCFA</span></div></div>
+        <ul class="lic-list">
+          <li><span class="li-check">✓</span> Fichier WAV non compressé</li>
+          <li><span class="li-check">✓</span> Jusqu'à 500 000 streams</li>
+          <li><span class="li-check">✓</span> Usage commercial autorisé</li>
+          <li><span class="li-check">✓</span> Stems inclus</li>
+          <li><span class="li-check">✓</span> Toutes plateformes digitales</li>
+        </ul>
+        <button class="btn-lic btn-lic-gold" onclick="showToast('Licence Premium sélectionnée !')">Choisir Premium</button>
+      </div>
+      <div class="lic-card">
+        <div class="lic-top"><div class="lic-tier">Exclusif Total</div><div class="lic-price">80 000<span>FCFA</span></div></div>
+        <ul class="lic-list">
+          <li><span class="li-check">✓</span> Beat retiré du catalogue</li>
+          <li><span class="li-check">✓</span> Streams illimités</li>
+          <li><span class="li-check">✓</span> Tous fichiers sources</li>
+          <li><span class="li-check">✓</span> Contrat signé & scellé</li>
+          <li><span class="li-check">✓</span> Droits d'auteur transférés</li>
+        </ul>
+        <button class="btn-lic" onclick="showToast('Licence Exclusif sélectionnée')">Choisir Exclusif</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- À PROPOS -->
+  <div class="about-section" id="about">
+    <div class="about-inner">
+      <div class="about-art">
+        <div class="about-disc">
+          <div class="ad-ring r1"></div><div class="ad-ring r2"></div><div class="ad-ring r3"></div>
+          <div class="ad-center">SB</div>
+        </div>
+        <div class="about-pro-badge">BEATMAKER PRO</div>
+      </div>
+      <div class="about-text-col">
+        <div class="sec-tag">À PROPOS</div>
+        <h2 class="sec-title">SNAZZY <em>BEAT</em></h2>
+        <p class="about-p">Producteur de beats basé en Afrique de l'Ouest, SNAZZY BEAT crée des instrumentaux qui allient la profondeur des sonorités africaines à l'énergie brute des scènes mondiales du rap et de l'afro-music.</p>
+        <p class="about-p">Chaque beat est une architecture sonore soigneusement construite — des basses qui secouent les enceintes, des mélodies qui s'incrustent dans la mémoire, et un groove imparable.</p>
+        <div class="about-tags"><span>Drill</span><span>Trap</span><span>Afrobeat</span><span>Amapiano</span></div>
+        <div class="about-socials">
+          <a class="soc-btn" href="#" title="Instagram"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></a>
+          <a class="soc-btn" href="#" title="YouTube"><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.4a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon fill="#0a0a0a" points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
+          <a class="soc-btn" href="#" title="TikTok"><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.77-.39 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V8.69a8.18 8.18 0 004.76 1.51V6.75a4.85 4.85 0 01-1-.06z"/></svg></a>
+          <a class="soc-btn" href="#" title="WhatsApp"><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.5 2C6.253 2 2 6.253 2 11.5c0 1.909.549 3.69 1.498 5.194L2 22l5.458-1.464A9.454 9.454 0 0011.5 21c5.247 0 9.5-4.253 9.5-9.5S16.747 2 11.5 2z"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-logo"><div class="logo-mark sm">SB</div><span>SNAZZY BEAT © 2025</span></div>
+      <div class="footer-links"><a href="#">Mentions légales</a><a href="#">Contact</a><a href="#">FAQ</a></div>
+      <div class="footer-pay"><span class="pay-tag">Orange Money</span><span class="pay-tag">Wave</span><span class="pay-tag">Moov</span></div>
+    </div>
+  </footer>
+</section>
+
+<!-- DASHBOARD -->
+<section id="dashboard" class="page">
+  <div class="dashboard-layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo" onclick="showPage('home')">
+        <div class="logo-mark sm">SB</div>
+        <div><div class="logo-snazzy" style="font-size:.55rem;letter-spacing:.18em">SNAZZY</div><div class="logo-beat" style="font-size:.9rem">BEAT</div></div>
+      </div>
+      <nav class="sidebar-nav">
+        <button class="sb-link active" onclick="showDashTab('overview',this)">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Vue d'ensemble
+        </button>
+        <button class="sb-link" onclick="showDashTab('catalogue',this)">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>Mes Beats
+        </button>
+        <button class="sb-link" onclick="showDashTab('orders',this)">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>Commandes
+        </button>
+        <button class="sb-link" onclick="showDashTab('analytics',this)">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Analytiques
+        </button>
+        <button class="sb-link" onclick="showDashTab('settings',this)">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>Paramètres
+        </button>
+      </nav>
+      <button class="sb-back" onclick="showPage('home')">
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Retour au site
+      </button>
+    </aside>
+    <main class="dash-main">
+      <div class="dash-topbar">
+        <div><p class="dash-hi">Bienvenue,</p><p class="dash-name">SNAZZY BEAT</p></div>
+        <div class="dash-top-right">
+          <button class="notif-btn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg><span class="notif-dot"></span></button>
+          <div class="dash-avatar">SB</div>
+        </div>
+      </div>
+      <!-- OVERVIEW -->
+      <div class="dash-tab active" id="tab-overview">
+        <div class="kpi-grid">
+          <div class="kpi-card"><div class="kpi-icon gold-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 100 7h5a3.5 3.5 0 110 7H6"/></svg></div><div class="kpi-body"><div class="kpi-val">247 500</div><div class="kpi-lbl">Revenus (FCFA)</div></div><div class="kpi-trend up">↑ 18%</div></div>
+          <div class="kpi-card"><div class="kpi-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></div><div class="kpi-body"><div class="kpi-val">34</div><div class="kpi-lbl">Commandes</div></div><div class="kpi-trend up">↑ 5</div></div>
+          <div class="kpi-card"><div class="kpi-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><div class="kpi-body"><div class="kpi-val">28</div><div class="kpi-lbl">Beats actifs</div></div><div class="kpi-trend neutral">+ 2</div></div>
+          <div class="kpi-card"><div class="kpi-icon gold-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div><div class="kpi-body"><div class="kpi-val">12 480</div><div class="kpi-lbl">Écoutes totales</div></div><div class="kpi-trend up">↑ 320</div></div>
+        </div>
+        <div class="dash-two-col">
+          <div class="dash-card"><div class="dash-card-hd"><span>Commandes récentes</span><button class="card-more" onclick="showDashTab('orders',null)">Voir tout →</button></div><div id="recentOrders"></div></div>
+          <div class="dash-card"><div class="dash-card-hd"><span>Top beats</span><span style="font-size:.7rem;color:var(--muted)">Ce mois</span></div><div id="topBeatsList"></div></div>
+        </div>
+      </div>
+      <!-- MES BEATS -->
+      <div class="dash-tab" id="tab-catalogue">
+        <div class="tab-hd"><h2 class="tab-title">Mes Beats <span class="tab-ct">28</span></h2><button class="btn-primary" onclick="showToast('Formulaire ajout beat bientôt !')">+ Ajouter</button></div>
+        <div class="dash-card" style="margin-top:0;padding:0;overflow:hidden">
+        <div class="table-wrap"><table class="dash-table"><thead><tr><th>#</th><th>Titre</th><th>Genre</th><th>BPM</th><th>Prix</th><th>Écoutes</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="dashBeatTableBody"></tbody></table></div></div>
+      </div>
+      <!-- COMMANDES -->
+      <div class="dash-tab" id="tab-orders">
+        <div class="tab-hd"><h2 class="tab-title">Commandes <span class="tab-ct">34</span></h2><div class="search-bar"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Rechercher..." id="orderSearch" oninput="filterOrders(this.value)"/></div></div>
+        <div class="dash-card" style="margin-top:0;padding:0;overflow:hidden"><table class="dash-table"><thead><tr><th>ID</th><th>Client</th><th>Beat</th><th>Licence</th><th>Montant</th><th>Date</th><th>Statut</th></tr></thead><tbody id="ordersTableBody"></tbody></table></div>
+      </div>
+      <!-- ANALYTICS -->
+      <div class="dash-tab" id="tab-analytics">
+        <div class="tab-hd"><h2 class="tab-title">Analytiques</h2></div>
+        <div class="analytics-grid">
+          <div class="dash-card analytics-card"><div class="dash-card-hd"><span>Revenus mensuels (FCFA)</span></div><div class="chart-area" id="revenueChart"></div></div>
+          <div class="dash-card"><div class="dash-card-hd"><span>Répartition genres</span></div><div class="genre-bars" id="genreBars"></div></div>
+        </div>
+        <div class="stats-row">
+          <div class="stat-mini"><div class="sm-lbl">Taux conversion</div><div class="sm-val gold-text">4.8%</div></div>
+          <div class="stat-mini"><div class="sm-lbl">Panier moyen</div><div class="sm-val">18 500 F</div></div>
+          <div class="stat-mini"><div class="sm-lbl">Exclusifs vendus</div><div class="sm-val gold-text">3</div></div>
+          <div class="stat-mini"><div class="sm-lbl">Nouveaux clients/mois</div><div class="sm-val">12</div></div>
+        </div>
+      </div>
+      <!-- PARAMÈTRES -->
+      <div class="dash-tab" id="tab-settings">
+        <div class="tab-hd"><h2 class="tab-title">Paramètres</h2></div>
+        <div class="settings-two-col">
+          <div class="dash-card">
+            <div class="settings-group-title">Profil public</div>
+            <div class="sf"><label>Nom de la plateforme</label><input type="text" value="SNAZZY BEAT" class="si"/></div>
+            <div class="sf"><label>Slogan</label><input type="text" value="Beats de qualité studio pour artistes ambitieux" class="si"/></div>
+            <div class="sf"><label>Email de contact</label><input type="email" value="contact@snazzybeat.com" class="si"/></div>
+            <div class="sf"><label>WhatsApp</label><input type="tel" value="+226 XX XX XX XX" class="si"/></div>
+            <button class="btn-primary" style="margin-top:8px;justify-content:center" onclick="showToast('Profil sauvegardé !')">Sauvegarder</button>
+          </div>
+          <div class="dash-card">
+            <div class="settings-group-title">Tarifs par défaut</div>
+            <div class="sf"><label>Licence MP3 Basic (FCFA)</label><input type="number" value="5000" class="si"/></div>
+            <div class="sf"><label>Licence WAV Premium (FCFA)</label><input type="number" value="15000" class="si"/></div>
+            <div class="sf"><label>Licence Exclusive (FCFA)</label><input type="number" value="80000" class="si"/></div>
+            <div class="settings-group-title" style="margin-top:20px">Paiements acceptés</div>
+            <label class="toggle-row"><span>Orange Money</span><input type="checkbox" checked class="tog"/><span class="tog-sl"></span></label>
+            <label class="toggle-row"><span>Wave</span><input type="checkbox" checked class="tog"/><span class="tog-sl"></span></label>
+            <label class="toggle-row"><span>Moov Money</span><input type="checkbox" class="tog"/><span class="tog-sl"></span></label>
+            <button class="btn-primary" style="margin-top:12px;justify-content:center" onclick="showToast('Tarifs sauvegardés !')">Sauvegarder</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</section>
+
+<!-- MODAL LOGIN -->
+<div class="modal-overlay" id="loginModal" onclick="closeModalOutside(event,'loginModal')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('loginModal')">✕</button>
+    <div class="modal-logo"><div class="logo-mark">SB</div><div><div class="logo-snazzy" style="font-size:.55rem;letter-spacing:.18em">SNAZZY</div><div class="logo-beat" style="font-size:.9rem">BEAT</div></div></div>
+    <h3 class="modal-title">Connexion Admin</h3>
+    <div class="modal-field"><label>Email</label><input type="email" placeholder="admin@snazzybeat.com" class="modal-input" id="loginEmail"/></div>
+    <div class="modal-field"><label>Mot de passe</label><input type="password" placeholder="••••••••" class="modal-input" id="loginPass"/></div>
+    <button class="btn-primary" style="width:100%;justify-content:center;margin-top:4px" onclick="doLogin()">Se connecter</button>
+    <p class="modal-hint">Accès réservé à l'administrateur SNAZZY BEAT</p>
+  </div>
+</div>
+
+<!-- MODAL ACHAT -->
+<div class="modal-overlay" id="buyModal" onclick="closeModalOutside(event,'buyModal')">
+  <div class="modal-box buy-modal-box">
+    <button class="modal-close" onclick="closeModal('buyModal')">✕</button>
+    <h3 class="modal-title" id="buyBeatTitle">Acheter le beat</h3>
+    <p class="buy-sub">Sélectionne ta licence</p>
+    <div class="buy-lic-opts" id="buyLicOpts"></div>
+    <div class="buy-total-row"><span>Total</span><span class="buy-total-val gold-text" id="buyTotal">—</span></div>
+    <button class="btn-primary" style="width:100%;justify-content:center;margin-top:8px" onclick="confirmBuy()">Confirmer & Payer</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ─── DATA ───
+const BEATS = [
+  {id:1,title:'Dark Ritual',genre:'drill',bpm:138,key:'C#m',price:12000,plays:2840,emoji:'🌑'},
+  {id:2,title:'Gold Rush',genre:'trap',bpm:142,key:'Fm',price:10000,plays:1920,emoji:'💰'},
+  {id:3,title:'Lagos Nights',genre:'afrobeat',bpm:106,key:'Gm',price:14000,plays:3100,emoji:'🌍'},
+  {id:4,title:'Piano Keys',genre:'amapiano',bpm:114,key:'Am',price:15000,plays:2250,emoji:'🎹'},
+  {id:5,title:'Midnight Trap',genre:'trap',bpm:145,key:'Dm',price:9000,plays:1680,emoji:'🌙'},
+  {id:6,title:'Afro Wave',genre:'afrobeat',bpm:102,key:'Em',price:13000,plays:2700,emoji:'🌊'},
+  {id:7,title:'Street Code',genre:'drill',bpm:140,key:'Bm',price:11000,plays:1550,emoji:'🏙️'},
+  {id:8,title:'Joburg Groove',genre:'amapiano',bpm:112,key:'F#m',price:16000,plays:2980,emoji:'🎵'},
+];
+const ORDERS = [
+  {id:'#0034',client:'Kofi A.',beat:'Dark Ritual',lic:'WAV Premium',amount:'15 000',date:'03 mai',status:'Payé'},
+  {id:'#0033',client:'Aminata S.',beat:'Lagos Nights',lic:'MP3 Basic',amount:'5 000',date:'02 mai',status:'Payé'},
+  {id:'#0032',client:'Oumar D.',beat:'Gold Rush',lic:'Exclusif',amount:'80 000',date:'01 mai',status:'Payé'},
+  {id:'#0031',client:'Fatou B.',beat:'Piano Keys',lic:'WAV Premium',amount:'15 000',date:'30 avr',status:'En attente'},
+  {id:'#0030',client:'Ibrahim K.',beat:'Afro Wave',lic:'MP3 Basic',amount:'5 000',date:'29 avr',status:'Payé'},
+  {id:'#0029',client:'Mariam T.',beat:'Street Code',lic:'WAV Premium',amount:'15 000',date:'28 avr',status:'Payé'},
+  {id:'#0028',client:'Seydou C.',beat:'Joburg Groove',lic:'Exclusif',amount:'80 000',date:'27 avr',status:'En attente'},
+];
+const LICENCES = [{name:'MP3 Basic',price:5000},{name:'WAV Premium',price:15000},{name:'Exclusif Total',price:80000}];
+const REVENUE = [{m:'Nov',v:18000},{m:'Déc',v:32000},{m:'Jan',v:25000},{m:'Fév',v:41000},{m:'Mar',v:38000},{m:'Avr',v:52000},{m:'Mai',v:42000}];
+const GENRES_DIST = [{name:'Drill',pct:35,color:'#a78bfa'},{name:'Trap',pct:28,color:'#f87171'},{name:'Afrobeat',pct:22,color:'#34d399'},{name:'Amapiano',pct:15,color:'#60a5fa'}];
+
+let currentPage='home', fpIndex=0, fpPlaying=false, fpInterval=null, fpSec=0, fpTotalSec=174;
+let selectedBeat=null, selectedLic=null, vizInterval=null;
+
+// ─── PAGE ROUTER ───
+function showPage(p){
+  document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
+  document.getElementById(p).classList.add('active');
+  currentPage=p;
+  if(p==='dashboard') initDashboard();
+  window.scrollTo(0,0);
+}
+
+// ─── NAV ───
+function setActiveNav(el){document.querySelectorAll('.nav-link').forEach(a=>a.classList.remove('active'));el.classList.add('active')}
+function scrollToId(id){showPage('home');setTimeout(()=>document.getElementById(id)?.scrollIntoView({behavior:'smooth'}),100)}
+function toggleMobileNav(){document.getElementById('mobileMenu').classList.toggle('open')}
+
+// ─── COUNTER ANIMATION ───
+function animateCounters(){
+  document.querySelectorAll('.hs-num').forEach(el=>{
+    const target=+el.dataset.target, dur=1200, step=16;
+    const inc=target/(dur/step); let cur=0;
+    const t=setInterval(()=>{cur=Math.min(cur+inc,target);el.textContent=Math.floor(cur);if(cur>=target)clearInterval(t)},step);
+  });
+}
+window.addEventListener('load',()=>{animateCounters();renderBeatGrid('all');buildVizBars()});
+
+// ─── BEAT GRID ───
+function renderBeatGrid(genre){
+  const grid=document.getElementById('beatGrid');
+  const filtered=genre==='all'?BEATS:BEATS.filter(b=>b.genre===genre);
+  grid.innerHTML=filtered.map(b=>`
+    <div class="beat-card" onclick="openBuyModal(${b.id})">
+      <div class="bc-top">
+        <div class="bc-thumb">${b.emoji}</div>
+        <span class="bc-badge badge-${b.genre}">${b.genre.toUpperCase()}</span>
+      </div>
+      <div class="bc-title">${b.title}</div>
+      <div class="bc-meta">${b.bpm} BPM · ${b.key}</div>
+      <div class="bc-bottom">
+        <div>
+          <div class="bc-price">${b.price.toLocaleString('fr')} <span style="font-size:.65rem;color:var(--muted)">FCFA</span></div>
+          <div class="bc-plays">▶ ${b.plays.toLocaleString('fr')}</div>
+        </div>
+        <div class="bc-actions">
+          <button class="bc-play" onclick="event.stopPropagation();previewBeat(${b.id})">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <button class="bc-buy" onclick="event.stopPropagation();openBuyModal(${b.id})">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+document.getElementById('genreFilters').addEventListener('click',e=>{
+  const btn=e.target.closest('.gf-btn');if(!btn)return;
+  document.querySelectorAll('.gf-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');renderBeatGrid(btn.dataset.genre);
+});
+function previewBeat(id){
+  const b=BEATS.find(x=>x.id===id);fpIndex=BEATS.indexOf(b);loadFeatured();if(!fpPlaying)toggleFeatured();
+  showToast(`▶ ${b.title} — ${b.bpm} BPM`);
+}
+
+// ─── FEATURED PLAYER ───
+function buildVizBars(){
+  const c=document.getElementById('vizBars');c.innerHTML='';
+  for(let i=0;i<28;i++){const d=document.createElement('div');d.className='viz-bar';d.style.height=(Math.random()*80+10)+'%';c.appendChild(d);}
+}
+function loadFeatured(){
+  const b=BEATS[fpIndex];
+  document.getElementById('fpTitle').textContent=b.title;
+  document.getElementById('fpMeta').textContent=`${b.bpm} BPM · ${b.key}`;
+  document.getElementById('fpGenre').textContent=b.genre.toUpperCase();
+  document.getElementById('fpPrice').textContent=b.price.toLocaleString('fr')+' FCFA';
+  fpSec=0;fpTotalSec=150+Math.floor(Math.random()*60);
+  document.getElementById('fpDuration').textContent=fmt(fpTotalSec);
+  document.getElementById('fpSeekFill').style.width='0%';
+  document.getElementById('fpCurrentTime').textContent='0:00';
+}
+function toggleFeatured(){
+  fpPlaying=!fpPlaying;
+  const vinyl=document.getElementById('vinylDisc');
+  const icon=document.getElementById('fpPlayIcon');
+  if(fpPlaying){
+    vinyl.classList.add('spin');
+    icon.innerHTML='<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+    startFpTick();startViz();
+  } else {
+    vinyl.classList.remove('spin');
+    icon.innerHTML='<path d="M8 5v14l11-7z"/>';
+    clearInterval(fpInterval);clearInterval(vizInterval);
+  }
+}
+function startFpTick(){
+  clearInterval(fpInterval);
+  fpInterval=setInterval(()=>{
+    fpSec++;if(fpSec>=fpTotalSec){fpSec=0;}
+    document.getElementById('fpCurrentTime').textContent=fmt(fpSec);
+    document.getElementById('fpSeekFill').style.width=(fpSec/fpTotalSec*100)+'%';
+  },1000);
+}
+function startViz(){
+  clearInterval(vizInterval);
+  vizInterval=setInterval(()=>{
+    const bars=document.querySelectorAll('.viz-bar');
+    bars.forEach((b,i)=>{
+      b.style.height=(Math.random()*70+10)+'%';
+      b.classList.toggle('active',Math.random()>.5);
+    });
+  },150);
+}
+function seekFeatured(e){const r=e.currentTarget.getBoundingClientRect();const p=(e.clientX-r.left)/r.width;fpSec=Math.floor(p*fpTotalSec);document.getElementById('fpSeekFill').style.width=(p*100)+'%';document.getElementById('fpCurrentTime').textContent=fmt(fpSec);}
+function prevFeatured(){fpIndex=(fpIndex-1+BEATS.length)%BEATS.length;loadFeatured();}
+function nextFeatured(){fpIndex=(fpIndex+1)%BEATS.length;loadFeatured();}
+function buyFeatured(){openBuyModal(BEATS[fpIndex].id)}
+function fmt(s){return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`}
+
+// ─── BUY MODAL ───
+function openBuyModal(id){
+  selectedBeat=BEATS.find(b=>b.id===id);selectedLic=null;
+  document.getElementById('buyBeatTitle').textContent=`Acheter — ${selectedBeat.title}`;
+  document.getElementById('buyTotal').textContent='—';
+  document.getElementById('buyLicOpts').innerHTML=LICENCES.map((l,i)=>`
+    <div class="buy-opt" onclick="selectLic(${i})">
+      <div><div class="buy-opt-name">${l.name}</div></div>
+      <div class="buy-opt-price">${l.price.toLocaleString('fr')} FCFA</div>
+    </div>`).join('');
+  openModal('buyModal');
+}
+function selectLic(i){
+  selectedLic=i;
+  document.querySelectorAll('.buy-opt').forEach((el,j)=>el.classList.toggle('selected',j===i));
+  document.getElementById('buyTotal').textContent=LICENCES[i].price.toLocaleString('fr')+' FCFA';
+}
+function confirmBuy(){
+  if(selectedLic===null){showToast('Sélectionne une licence !');return;}
+  closeModal('buyModal');
+  showToast(`✓ Commande confirmée — ${LICENCES[selectedLic].name}`);
+}
+
+// ─── MODALS ───
+function openModal(id){document.getElementById(id).classList.add('open')}
+function closeModal(id){document.getElementById(id).classList.remove('open')}
+function closeModalOutside(e,id){if(e.target===document.getElementById(id))closeModal(id)}
+function doLogin(){
+  const e=document.getElementById('loginEmail').value;
+  const p=document.getElementById('loginPass').value;
+  if(!e||!p){showToast('Remplis tous les champs !');return;}
+  closeModal('loginModal');
+  document.getElementById('loginBtn').style.display='none';
+  document.getElementById('dashboardBtn').style.display='';
+  showToast('Connexion réussie ! 🎉');
+  setTimeout(()=>showPage('dashboard'),600);
+}
+
+// ─── TOAST ───
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2600);
+}
+
+// ─── DASHBOARD ───
+function initDashboard(){renderRecentOrders();renderTopBeats();renderDashTable();renderOrders();renderChart();renderGenreBars();}
+function showDashTab(name,btn){
+  document.querySelectorAll('.dash-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  document.querySelectorAll('.sb-link').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  else document.querySelectorAll('.sb-link').forEach((b,i)=>{if(['overview','catalogue','orders','analytics','settings'][i]===name)b.classList.add('active')});
+}
+function renderRecentOrders(){
+  document.getElementById('recentOrders').innerHTML=ORDERS.slice(0,4).map(o=>`
+    <div class="mini-order">
+      <div class="mo-icon">🎵</div>
+      <div class="mo-body"><div class="mo-name">${o.client} — ${o.beat}</div><div class="mo-sub">${o.lic} · ${o.date}</div></div>
+      <div class="mo-price">${o.amount} F</div>
+    </div>`).join('');
+}
+function renderTopBeats(){
+  const sorted=[...BEATS].sort((a,b)=>b.plays-a.plays).slice(0,5);const max=sorted[0].plays;
+  document.getElementById('topBeatsList').innerHTML=sorted.map((b,i)=>`
+    <div class="top-beat-row">
+      <div class="tb-rank">${i+1}</div>
+      <div class="tb-body">
+        <div class="tb-title">${b.title}</div>
+        <div class="tb-plays">▶ ${b.plays.toLocaleString('fr')}</div>
+        <div class="tb-bar"><div class="tb-fill" style="width:${b.plays/max*100}%"></div></div>
+      </div>
+    </div>`).join('');
+}
+function renderDashTable(){
+  document.getElementById('dashBeatTableBody').innerHTML=BEATS.map((b,i)=>`
+    <tr>
+      <td>${String(i+1).padStart(2,'0')}</td>
+      <td><strong>${b.title}</strong></td>
+      <td><span class="bc-badge badge-${b.genre}">${b.genre}</span></td>
+      <td>${b.bpm}</td>
+      <td>${b.price.toLocaleString('fr')} F</td>
+      <td>${b.plays.toLocaleString('fr')}</td>
+      <td><span class="status-badge s-active">Actif</span></td>
+      <td><button class="action-btn" onclick="showToast('Beat ${b.title} modifié')">Modifier</button></td>
+    </tr>`).join('');
+}
+let allOrders=[...ORDERS];
+function renderOrders(list=allOrders){
+  document.getElementById('ordersTableBody').innerHTML=list.map(o=>`
+    <tr>
+      <td><strong>${o.id}</strong></td>
+      <td>${o.client}</td>
+      <td>${o.beat}</td>
+      <td>${o.lic}</td>
+      <td><strong>${o.amount} F</strong></td>
+      <td>${o.date}</td>
+      <td><span class="status-badge ${o.status==='Payé'?'s-paid':'s-pending'}">${o.status}</span></td>
+    </tr>`).join('');
+}
+function filterOrders(q){renderOrders(q?allOrders.filter(o=>JSON.stringify(o).toLowerCase().includes(q.toLowerCase())):allOrders)}
+function renderChart(){
+  const max=Math.max(...REVENUE.map(r=>r.v));
+  document.getElementById('revenueChart').innerHTML=REVENUE.map(r=>`
+    <div class="chart-bar-wrap">
+      <div class="chart-bar" style="height:${r.v/max*100}%;background:${r.m==='Avr'?'var(--gold2)':'var(--gold)'};opacity:${r.m==='Avr'?1:.6}"></div>
+      <div class="chart-label">${r.m}</div>
+    </div>`).join('');
+}
+function renderGenreBars(){
+  document.getElementById('genreBars').innerHTML=GENRES_DIST.map(g=>`
+    <div class="gb-row">
+      <div class="gb-top"><span>${g.name}</span><span class="gb-pct">${g.pct}%</span></div>
+      <div class="gb-track"><div class="gb-fill" style="width:${g.pct}%;background:${g.color}"></div></div>
+    </div>`).join('');
+}
+</script>
+</body>
+</html>
